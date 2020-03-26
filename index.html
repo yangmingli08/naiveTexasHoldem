@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <script src="function.js" charset="utf-8"></script>
+  <script src="data.js" charset="utf-8"></script>
+  <script src="io.js" charset="utf-8"></script>
+  <script src="shuffle.js" charset="utf-8"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Texas Hold'em</title>
+</head>
+
+<body>
+  <h3>Texas Holdem</h3>
+  <p>
+    Number of Players:
+    <input type="number" value="4" id="numOfPlayer" required></p>
+  <br>
+  <button type="button" onclick="deal()">Deal Cards</button>
+  <button type="button" onclick="flop()">Flop</button>
+  <button type="button" onclick="turn()">Turn</button>
+  <button type="button" onclick="river()">River</button>
+  <button type="button" onclick="showdown()">Showdown</button>
+  <br>
+  <div id='cont'></div>
+</body>
+
+</html>
