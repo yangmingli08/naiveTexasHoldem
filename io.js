@@ -113,7 +113,7 @@ function showdown() {
   for (i of resultArray[0]) {
     console.log('Win index: ' + i.cardValue().highCard.map(c => c.index));
     let s = i.cardValue().highCard.map(c => c.id);
-    wn.innerHTML += '<p>Winner is Player ' + (i.pid + 1) + ' ' + i.cardValue().Value + ': ' + beautify(s) + '</p><br>';
+    wn.innerHTML += '<p>Winner is Player ' + (i.pid + 1) + ' ' + i.cardValue().Value + ': ' + beautify(s) + '</p>';
   }
   document.getElementById('cont').appendChild(wn);
   document.getElementById("numOfPlayer").disabled = false;
