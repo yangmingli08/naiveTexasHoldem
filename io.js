@@ -1,4 +1,4 @@
-var playerArray = [];
+var playerArray;
 
 function deal() {
   shuffle();
@@ -69,24 +69,33 @@ function showdown() {
   const riverArray = [];
   riverArray.push(deck[2 * p + 7]);
   const playerObjArray = [];
+
   for (var i = 0; i < p; i++) {
     let temp = new Player(i, playerArray[i], flopArray, turnArray, riverArray);
     playerObjArray.push(temp);
   }
-  playerObjArray.sort((a, b) => b.cardValue().rank - a.cardValue().rank);
-  let winnie = playerObjArray.reduce((arr, obj) => {
-    if (compare(arr[0], obj) === null) {
-      if (obj.pid != 0) {
-        arr.push(obj);
-      }
-    } else {
-      arr[0] = compare(arr[0], obj);
-      for (i = 1; i < arr.length; i++) {
-        arr.pop();
+
+  for (var i = 1; i < playerObjArray.length; i++) {
+    for (var j = 0; j < playerObjArray.length - 1; j++) {
+      if (!comparePlayer(playerObjArray[j], playerObjArray[j + 1])) {
+        [playerObjArray[j], playerObjArray[j + 1]] = [playerObjArray[j + 1], playerObjArray[j]];
       }
     }
-    return arr;
-  }, [playerObjArray[0]]);
+  }
+
+  const resultArray = [
+    [playerObjArray[0]]
+  ];
+  var j = 0;
+  for (var i = 0; i < playerObjArray.length - 1; i++) {
+    if (comparePlayer(playerObjArray[i], playerObjArray[i + 1]) === null) {
+      resultArray[j].push(playerObjArray[i + 1]);
+    } else {
+      resultArray.push([]);
+      j++;
+      resultArray[j].push(playerObjArray[i + 1]);
+    }
+  }
   let pl = document.createElement("p");
   let tableString = '';
   tableString += '<table><tr><th>ID</th><th>Rank</th><th>Value</th><th>card</th></tr>';
@@ -100,11 +109,11 @@ function showdown() {
   tableString += '</table>';
   pl.innerHTML = tableString;
   document.getElementById('cont').appendChild(pl);
-  let wn = document.createElement("p");
-  for (i of winnie) {
+  let wn = document.createElement("div");
+  for (i of resultArray[0]) {
     console.log('Win index: ' + i.cardValue().highCard.map(c => c.index));
     let s = i.cardValue().highCard.map(c => c.id);
-    wn.innerHTML += 'Winner is Player ' + (i.pid + 1) + ' ' + i.cardValue().Value + ': ' + beautify(s) + '<br>';
+    wn.innerHTML += '<p>Winner is Player ' + (i.pid + 1) + ' ' + i.cardValue().Value + ': ' + beautify(s) + '</p><br>';
   }
   document.getElementById('cont').appendChild(wn);
   document.getElementById("numOfPlayer").disabled = false;

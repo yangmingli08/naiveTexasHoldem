@@ -1,27 +1,29 @@
-function compare(p1, p2) {
-  // NOTE: Return null is two players has same value, othewise return bigger one
-  var a1 = p1.cardValue().rank;
-  var a2 = p1.cardValue().highCard;
-  var b1 = p2.cardValue().rank;
-  var b2 = p2.cardValue().highCard;
-  if (a1 === b1) {
-    if (campareArray(a2, b2) === null) {
+function comparePlayer(p0, p1) {
+  // NOTE: Input p0 p1 are {Player}
+  // NOTE: Return null if same, otherwise return p0 > p1 ? true : false;
+  var a0 = p0.cardValue().rank;
+  var a1 = p0.cardValue().highCard;
+  var b0 = p1.cardValue().rank;
+  var b1 = p1.cardValue().highCard;
+  if (a0 === b0) {
+    if (campareObjArray(a1, b1) === null) {
       return null;
     } else {
-      return campareArray(a2, b2) === 0 ? p1 : p2;
+      return campareObjArray(a1, b1) ? true : false;
     }
-  } else return a1 > b1 ? p1 : p2;
+  } else return a0 > b0 ? true : false;
 }
 
-function campareArray(p0, p1) {
-  // NOTE: Return null if same, 0 if arr0 is bigger, 1 if arr1 is bigger
-  const arr0 = p0.map(c => c.value);
-  const arr1 = p1.map(c => c.value);
+function campareObjArray(hc0, hc1) {
+  // NOTE: Input hc0 hc1 are {CardObj} Array
+  // NOTE: Return null if same, otherwise return hc0 > hc1 ? true : false;
+  const arr0 = hc0.map(c => c.value);
+  const arr1 = hc1.map(c => c.value);
   for (i in arr0) {
     if (arr0[i] > arr1[i]) {
-      return 0;
+      return true;
     } else if (arr0[i] < arr1[i]) {
-      return 1;
+      return false;
     } else {
       if (i == arr0.length - 1) {
         return null;
@@ -162,7 +164,7 @@ function isFour(cardObjArray) {
   const stack = stackCards(cardObjArray);
   if (stack[0].length > 0) {
     identifier.flag = true;
-    identifier.cards = [...identifier.cards, ...stack[0][0]];
+    identifier.cards = stack[0][0];
     let tempArray = [];
     for (var i = 1; i < 4; i++) {
       for (j in stack[i]) {
