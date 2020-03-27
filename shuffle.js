@@ -1,3 +1,20 @@
+const maxCard = 52;
+var deck = [];
+for (var i = 0; i < maxCard; i++) {
+  deck.push(i);
+}
+
+function shuffle() {
+  var shufDeck = [];
+  for (var i = 0; i < maxCard; i++) {
+    let temp = Math.floor(Math.random() * (maxCard - i));
+    shufDeck.push(deck[temp]);
+    deck[temp] = deck[0];
+    deck.shift();
+  }
+  deck = shufDeck;
+}
+
 function beautify(deck) {
   const beautifyDeck = [];
   for (i in deck) {

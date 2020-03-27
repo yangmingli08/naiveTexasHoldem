@@ -5,20 +5,30 @@ function deal() {
   playerArray = [];
   document.getElementById('cont').innerHTML = '';
   let content = '';
+  let regex = /^([2-9]|10)$/;
   const p = parseInt(document.getElementById('numOfPlayer').value);
-  document.getElementById("numOfPlayer").disabled = true;
-  content += '<table><tr><th>ID</th><th>card</th></tr>';
-  for (let i = 0; i < p; i++) {
-    content += '<tr><td>Player ' + (i + 1) + '</td><td>' + beautify([deck[i], deck[p + i]]) + '</td></tr>'
-    playerArray.push([deck[i], deck[p + i]]);
+  if (regex.test(p)) {
+    document.getElementById("b0").style.visibility = "hidden";
+    document.getElementById("b1").style.visibility = "visible";
+    document.getElementById("numOfPlayer").disabled = true;
+    content += '<table><tr><th>ID</th><th>card</th></tr>';
+    for (let i = 0; i < p; i++) {
+      content += '<tr><td>Player ' + (i + 1) + '</td><td>' + beautify([deck[i], deck[p + i]]) + '</td></tr>'
+      playerArray.push([deck[i], deck[p + i]]);
+    }
+    content += '</table>';
+    let pp = document.createElement("p");
+    pp.innerHTML = content;
+    document.getElementById('cont').appendChild(pp);
+  } else {
+    document.getElementById('cont').innerHTML = '<p>Invalid input </p>';
   }
-  content += '</table>';
-  let pp = document.createElement("p");
-  pp.innerHTML = content;
-  document.getElementById('cont').appendChild(pp);
 }
 
+
 function flop() {
+  document.getElementById("b1").style.visibility = "hidden";
+  document.getElementById("b2").style.visibility = "visible";
   const p = parseInt(document.getElementById('numOfPlayer').value);
   let content = 'Flop: ' + beautify([deck[2 * p + 1], deck[2 * p + 2], deck[2 * p + 3]]);
   let pp = document.createElement("p");
@@ -27,6 +37,8 @@ function flop() {
 }
 
 function turn() {
+  document.getElementById("b2").style.visibility = "hidden";
+  document.getElementById("b3").style.visibility = "visible";
   const p = parseInt(document.getElementById('numOfPlayer').value);
   let content = 'Turn: ' + beautify([deck[2 * p + 5]]);
   let pp = document.createElement("p");
@@ -35,6 +47,8 @@ function turn() {
 }
 
 function river() {
+  document.getElementById("b3").style.visibility = "hidden";
+  document.getElementById("b4").style.visibility = "visible";
   const p = parseInt(document.getElementById('numOfPlayer').value);
   let content = 'River: ' + beautify([deck[2 * p + 7]]);
   let pp = document.createElement("p");
@@ -43,6 +57,8 @@ function river() {
 }
 
 function showdown() {
+  document.getElementById("b4").style.visibility = "hidden";
+  document.getElementById("b0").style.visibility = "visible";
   const p = parseInt(document.getElementById('numOfPlayer').value);
   const flopArray = [];
   flopArray.push(deck[2 * p + 1]);
