@@ -25,7 +25,6 @@ function deal() {
   }
 }
 
-
 function flop() {
   document.getElementById("b1").style.visibility = "hidden";
   document.getElementById("b2").style.visibility = "visible";
@@ -69,12 +68,10 @@ function showdown() {
   const riverArray = [];
   riverArray.push(deck[2 * p + 7]);
   const playerObjArray = [];
-
   for (var i = 0; i < p; i++) {
     let temp = new Player(i, playerArray[i], flopArray, turnArray, riverArray);
     playerObjArray.push(temp);
   }
-
   for (var i = 1; i < playerObjArray.length; i++) {
     for (var j = 0; j < playerObjArray.length - 1; j++) {
       if (!comparePlayer(playerObjArray[j], playerObjArray[j + 1])) {
@@ -82,7 +79,6 @@ function showdown() {
       }
     }
   }
-
   const resultArray = [
     [playerObjArray[0]]
   ];
