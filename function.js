@@ -172,7 +172,7 @@ function isFour(cardObjArray) {
           tempArray.push(k);
       }
     }
-    tempArray = highCard(tempArray).cards;
+    tempArray.sort((a, b) => b.value - a.value);
     identifier.cards = [...identifier.cards, ...tempArray];
   }
   return identifier;
@@ -187,7 +187,7 @@ function isHouse(cardObjArray) {
       for (const k of stack[1][j])
         identifier.cards.push(k);
     }
-    identifier.cards = highCard(identifier.cards).cards;
+    identifier.cards.sort((a, b) => b.value - a.value);
   }
   if (stack[1].length === 1 && stack[2].length > 0) {
     identifier.flag = true;
@@ -200,7 +200,7 @@ function isHouse(cardObjArray) {
       for (const k of stack[2][j])
         tempArray.push(k);
     }
-    tempArray = highCard(tempArray).cards;
+    tempArray.sort((a, b) => b.value - a.value);
     identifier.cards = [...identifier.cards, ...tempArray];
   }
   return identifier;
@@ -222,7 +222,7 @@ function isThree(cardObjArray) {
           tempArray.push(k);
       }
     }
-    tempArray = highCard(tempArray).cards;
+    tempArray.sort((a, b) => b.value - a.value);
     identifier.cards = [...identifier.cards, ...tempArray];
   }
   return identifier;
@@ -237,7 +237,7 @@ function isDoublePair(cardObjArray) {
       for (const k of stack[2][j])
         identifier.cards.push(k);
     }
-    identifier.cards = highCard(identifier.cards).cards;
+    identifier.cards.sort((a, b) => b.value - a.value);
     for (const j in stack[3]) {
       for (const k of stack[3][j])
         identifier.cards.push(k);
@@ -246,7 +246,7 @@ function isDoublePair(cardObjArray) {
     for (let i = 0; i < 3; i++) {
       tempArray.push(identifier.cards.pop());
     }
-    tempArray = highCard(tempArray).cards;
+    tempArray.sort((a, b) => b.value - a.value);
     identifier.cards = [...identifier.cards, ...tempArray];
   }
   return identifier;
@@ -268,7 +268,7 @@ function isPair(cardObjArray) {
           tempArray.push(k);
       }
     }
-    tempArray = highCard(tempArray).cards;
+    tempArray.sort((a, b) => b.value - a.value);
     identifier.cards = [...identifier.cards, ...tempArray];
   }
   return identifier;
