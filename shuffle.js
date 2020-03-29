@@ -1,23 +1,20 @@
 const maxCard = 52;
 var deck = [];
-for (var i = 0; i < maxCard; i++) {
+for (let i = 0; i < maxCard; i++) {
   deck.push(i);
 }
 
 function shuffle() {
-  var shufDeck = [];
-  for (var i = 0; i < maxCard; i++) {
-    let temp = Math.floor(Math.random() * (maxCard - i));
-    shufDeck.push(deck[temp]);
-    deck[temp] = deck[0];
-    deck.shift();
+  const shufDeck = [];
+  for (let i = 0; i < maxCard; i++) {
+    shufDeck.push(deck.splice(Math.floor(Math.random() * (maxCard - i)), 1)[0]);
   }
-  deck = shufDeck;
+  return shufDeck;
 }
 
 function beautify(deck) {
   const beautifyDeck = [];
-  for (i in deck) {
+  for (const i in deck) {
     beautifyDeck[i] = cardGenerator(deck[i]);
   }
   return beautifyDeck;

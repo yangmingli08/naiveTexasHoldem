@@ -1,10 +1,10 @@
 function comparePlayer(p0, p1) {
   // NOTE: Input p0 p1 are {Player}
   // NOTE: Return null if same, otherwise return p0 > p1 ? true : false;
-  var a0 = p0.cardValue().rank;
-  var a1 = p0.cardValue().highCard;
-  var b0 = p1.cardValue().rank;
-  var b1 = p1.cardValue().highCard;
+  const a0 = p0.cardValue().rank;
+  const a1 = p0.cardValue().highCard;
+  const b0 = p1.cardValue().rank;
+  const b1 = p1.cardValue().highCard;
   if (a0 === b0) {
     if (campareObjArray(a1, b1) === null) {
       return null;
@@ -19,13 +19,13 @@ function campareObjArray(hc0, hc1) {
   // NOTE: Return null if same, otherwise return hc0 > hc1 ? true : false;
   const arr0 = hc0.map(c => c.value);
   const arr1 = hc1.map(c => c.value);
-  for (i in arr0) {
+  for (const i in arr0) {
     if (arr0[i] > arr1[i]) {
       return true;
     } else if (arr0[i] < arr1[i]) {
       return false;
     } else {
-      if (i == arr0.length - 1) {
+      if (i === arr0.length - 1) {
         return null;
       }
     }
@@ -111,7 +111,7 @@ function isStraight(cardObjArray) {
   cardObjArray.sort((a, b) => b.value - a.value);
   const a = cardObjArray.filter(card => card.isAce === true);
   if (a.length > 0) {
-    for (i of a) {
+    for (const i of a) {
       const ace = new CardObj(i.id);
       ace.index = i.index;
       ace.value = 1;
@@ -119,7 +119,7 @@ function isStraight(cardObjArray) {
     }
   }
   let straightCard = [cardObjArray[0]];
-  for (i = 0; i < cardObjArray.length - 1; i++) {
+  for (let i = 0; i < cardObjArray.length - 1; i++) {
     if (cardObjArray[i].value === cardObjArray[i + 1].value) {
       continue;
     } else if (cardObjArray[i].value - 1 === cardObjArray[i + 1].value) {
@@ -133,7 +133,7 @@ function isStraight(cardObjArray) {
     }
   }
   if (a.length > 0) {
-    for (i in a) {
+    for (const i in a) {
       cardObjArray.pop();
     }
   }
@@ -143,11 +143,11 @@ function isStraight(cardObjArray) {
 function stackCards(cardObjArray) {
   const indexArray = [];
   const resultArray = [];
-  for (var i = 2; i < 15; i++) {
+  for (let i = 2; i < 15; i++) {
     const tempArray = cardObjArray.filter(card => card.value === i);
     indexArray.push(tempArray);
   }
-  for (var i = 4; i > 0; i--) {
+  for (let i = 4; i > 0; i--) {
     const tempArray = indexArray.reduce((arr, obj) => {
       if (obj.length === i) {
         arr.push(obj);
@@ -166,9 +166,9 @@ function isFour(cardObjArray) {
     identifier.flag = true;
     identifier.cards = stack[0][0];
     let tempArray = [];
-    for (var i = 1; i < 4; i++) {
-      for (j in stack[i]) {
-        for (k of stack[i][j])
+    for (let i = 1; i < 4; i++) {
+      for (const j in stack[i]) {
+        for (const k of stack[i][j])
           tempArray.push(k);
       }
     }
@@ -183,21 +183,21 @@ function isHouse(cardObjArray) {
   const stack = stackCards(cardObjArray);
   if (stack[1].length === 2) {
     identifier.flag = true;
-    for (j in stack[1]) {
-      for (k of stack[1][j])
+    for (const j in stack[1]) {
+      for (const k of stack[1][j])
         identifier.cards.push(k);
     }
     identifier.cards = highCard(identifier.cards).cards;
   }
   if (stack[1].length === 1 && stack[2].length > 0) {
     identifier.flag = true;
-    for (j in stack[1]) {
-      for (k of stack[1][j])
+    for (const j in stack[1]) {
+      for (const k of stack[1][j])
         identifier.cards.push(k);
     }
     let tempArray = [];
-    for (j in stack[2]) {
-      for (k of stack[2][j])
+    for (const j in stack[2]) {
+      for (const k of stack[2][j])
         tempArray.push(k);
     }
     tempArray = highCard(tempArray).cards;
@@ -211,14 +211,14 @@ function isThree(cardObjArray) {
   const stack = stackCards(cardObjArray);
   if (stack[1].length === 1) {
     identifier.flag = true;
-    for (j in stack[1]) {
-      for (k of stack[1][j])
+    for (const j in stack[1]) {
+      for (const k of stack[1][j])
         identifier.cards.push(k);
     }
     let tempArray = [];
-    for (var i = 2; i < 4; i++) {
-      for (j in stack[i]) {
-        for (k of stack[i][j])
+    for (let i = 2; i < 4; i++) {
+      for (const j in stack[i]) {
+        for (const k of stack[i][j])
           tempArray.push(k);
       }
     }
@@ -233,17 +233,17 @@ function isDoublePair(cardObjArray) {
   const stack = stackCards(cardObjArray);
   if (stack[2].length > 1) {
     identifier.flag = true;
-    for (j in stack[2]) {
-      for (k of stack[2][j])
+    for (const j in stack[2]) {
+      for (const k of stack[2][j])
         identifier.cards.push(k);
     }
     identifier.cards = highCard(identifier.cards).cards;
-    for (j in stack[3]) {
-      for (k of stack[3][j])
+    for (const j in stack[3]) {
+      for (const k of stack[3][j])
         identifier.cards.push(k);
     }
     let tempArray = [];
-    for (var i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) {
       tempArray.push(identifier.cards.pop());
     }
     tempArray = highCard(tempArray).cards;
@@ -257,14 +257,14 @@ function isPair(cardObjArray) {
   const stack = stackCards(cardObjArray);
   if (stack[2].length === 1) {
     identifier.flag = true;
-    for (j in stack[2]) {
-      for (k of stack[2][j])
+    for (const j in stack[2]) {
+      for (const k of stack[2][j])
         identifier.cards.push(k);
     }
     let tempArray = [];
-    for (var i = 3; i < 4; i++) {
-      for (j in stack[i]) {
-        for (k of stack[i][j])
+    for (let i = 3; i < 4; i++) {
+      for (const j in stack[i]) {
+        for (const k of stack[i][j])
           tempArray.push(k);
       }
     }

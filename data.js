@@ -7,7 +7,7 @@ class Player {
     this.river = river;
     this.card = hand.concat(flop).concat(turn).concat(river);
     this.cardObj = [];
-    for (i in this.card) {
+    for (const i in this.card) {
       const c = new CardObj(this.card[i]);
       c.index = parseInt(i);
       this.cardObj.push(c);
@@ -55,7 +55,7 @@ class Value {
       default:
         break;
     }
-    this.Value = pName;
+    this.value = pName;
     this.highCard = cardObjArray;
   }
 }
