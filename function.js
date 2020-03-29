@@ -6,7 +6,7 @@ function comparePlayer(p0, p1) {
   const b0 = p1.cardValue().rank;
   const b1 = p1.cardValue().highCard;
   if (a0 === b0) {
-    if (campareObjArray(a1, b1) === null) {
+    if (campareObjArray(a1, b1) == null) {
       return null;
     } else {
       return campareObjArray(a1, b1) ? true : false;
