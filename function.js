@@ -1,4 +1,4 @@
-function comparePlayer(p0, p1) {
+const comparePlayer = (p0, p1) => {
   // NOTE: Input p0 p1 are {Player}
   // NOTE: Return null if same, otherwise return p0 > p1 ? true : false;
   const a0 = p0.cardValue().rank;
@@ -14,7 +14,7 @@ function comparePlayer(p0, p1) {
   } else return a0 > b0 ? true : false;
 }
 
-function campareObjArray(hc0, hc1) {
+const campareObjArray = (hc0, hc1) => {
   // NOTE: Input hc0 hc1 are {CardObj} Array
   // NOTE: Return null if same, otherwise return hc0 > hc1 ? true : false;
   const arr0 = hc0.map(c => c.value);
@@ -32,7 +32,7 @@ function campareObjArray(hc0, hc1) {
   }
 }
 
-function trim(cards) {
+const trim = (cards) => {
   if (cards.length < 6) {
     return cards;
   } else {
@@ -41,7 +41,7 @@ function trim(cards) {
   }
 }
 
-function valueCard(cardObjArray) {
+const valueCard = (cardObjArray) => {
   if (isFlush(cardObjArray).flag) {
     if (isStraight(isFlush(cardObjArray).cards).flag) {
       if (isStraight(isFlush(cardObjArray).cards).cards[0].value === 14) {
@@ -81,7 +81,7 @@ function valueCard(cardObjArray) {
   }
 }
 
-function isFlush(cardObjArray) {
+const isFlush = (cardObjArray) => {
   const identifier = new Identifier(false, []);
   cardObjArray.sort((a, b) => b.value - a.value);
   const s = cardObjArray.filter(card => card.suit === '&spades;');
@@ -106,7 +106,7 @@ function isFlush(cardObjArray) {
   return identifier;
 }
 
-function isStraight(cardObjArray) {
+const isStraight = (cardObjArray) => {
   const identifier = new Identifier(false, []);
   cardObjArray.sort((a, b) => b.value - a.value);
   const a = cardObjArray.filter(card => card.isAce === true);
@@ -140,7 +140,7 @@ function isStraight(cardObjArray) {
   return identifier;
 }
 
-function stackCards(cardObjArray) {
+const stackCards = (cardObjArray) => {
   const indexArray = [];
   const resultArray = [];
   for (let i = 2; i < 15; i++) {
@@ -159,7 +159,7 @@ function stackCards(cardObjArray) {
   return resultArray;
 }
 
-function isFour(cardObjArray) {
+const isFour = (cardObjArray) => {
   const identifier = new Identifier(false, []);
   const stack = stackCards(cardObjArray);
   if (stack[0].length > 0) {
@@ -178,7 +178,7 @@ function isFour(cardObjArray) {
   return identifier;
 }
 
-function isHouse(cardObjArray) {
+const isHouse = (cardObjArray) => {
   const identifier = new Identifier(false, []);
   const stack = stackCards(cardObjArray);
   if (stack[1].length === 2) {
@@ -206,7 +206,7 @@ function isHouse(cardObjArray) {
   return identifier;
 }
 
-function isThree(cardObjArray) {
+const isThree = (cardObjArray) => {
   const identifier = new Identifier(false, []);
   const stack = stackCards(cardObjArray);
   if (stack[1].length === 1) {
@@ -228,7 +228,7 @@ function isThree(cardObjArray) {
   return identifier;
 }
 
-function isDoublePair(cardObjArray) {
+const isDoublePair = (cardObjArray) => {
   const identifier = new Identifier(false, []);
   const stack = stackCards(cardObjArray);
   if (stack[2].length > 1) {
@@ -252,7 +252,7 @@ function isDoublePair(cardObjArray) {
   return identifier;
 }
 
-function isPair(cardObjArray) {
+const isPair = (cardObjArray) => {
   const identifier = new Identifier(false, []);
   const stack = stackCards(cardObjArray);
   if (stack[2].length === 1) {
@@ -274,7 +274,7 @@ function isPair(cardObjArray) {
   return identifier;
 }
 
-function highCard(cardObjArray) {
+const highCard = (cardObjArray) => {
   const identifier = new Identifier(true, cardObjArray.sort((a, b) => b.value - a.value));
   return identifier;
 }

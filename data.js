@@ -20,42 +20,19 @@ class Player {
 class Value {
   constructor(rank, cardObjArray) {
     this.rank = rank;
-    let pName = ''
-    switch (rank) {
-      case 0:
-        pName = 'High Card';
-        break;
-      case 1:
-        pName = 'One Pair';
-        break;
-      case 2:
-        pName = 'Two Pairs';
-        break;
-      case 3:
-        pName = 'Triple';
-        break;
-      case 4:
-        pName = 'Straight';
-        break;
-      case 5:
-        pName = 'Flush';
-        break;
-      case 6:
-        pName = 'Full House';
-        break;
-      case 7:
-        pName = 'Four of A Kind';
-        break;
-      case 8:
-        pName = 'Straight Flush';
-        break;
-      case 9:
-        pName = 'Royal Flush';
-        break;
-      default:
-        break;
+    const name = {
+      0: 'High Card',
+      1: 'One Pair',
+      2: 'Two Pairs',
+      3: 'Triple',
+      4: 'Straight',
+      5: 'Flush',
+      6: 'Full House',
+      7: 'Four of A Kind',
+      8: 'Straight Flush',
+      9: 'Royal Flush'
     }
-    this.value = pName;
+    this.value = name[rank];
     this.highCard = cardObjArray;
   }
 }
@@ -69,7 +46,7 @@ class CardObj {
   constructor(id) {
     this.id = id;
     this.suit = cardSuit(id);
-    this.num = cardNum(id);
+    this.char = cardChar(id);
     this.value = cardValue(id);
     this.isAce = id % 13 === 0 ? true : false;
   }

@@ -1,18 +1,19 @@
-const maxCard = 52;
 var deck = [];
-for (let i = 0; i < maxCard; i++) {
-  deck.push(i);
-}
 
-function shuffle() {
-  const shufDeck = [];
+const shuffle = () => {
+  const maxCard = 52;
+  const input = [];
+  const output = [];
   for (let i = 0; i < maxCard; i++) {
-    shufDeck.push(deck.splice(Math.floor(Math.random() * (maxCard - i)), 1)[0]);
+    input.push(i);
   }
-  return shufDeck;
+  for (let i = 0; i < maxCard; i++) {
+    output.push(input.splice(Math.floor(Math.random() * (maxCard - i)), 1)[0]);
+  }
+  return output;
 }
 
-function beautify(deck) {
+const beautify = (deck) => {
   const beautifyDeck = [];
   for (const i in deck) {
     beautifyDeck[i] = cardGenerator(deck[i]);
@@ -20,82 +21,57 @@ function beautify(deck) {
   return beautifyDeck;
 }
 
-function cardGenerator(card) {
-  return cardSuit(card) + cardNum(card);
+const cardGenerator = (card) => {
+  return cardSuit(card) + cardChar(card);
 }
 
-function cardSuit(card) {
+const cardSuit = (card) => {
   const suit = Math.floor(card / 13);
-  switch (suit) {
-    case 0:
-      return '&spades;';
-      break;
-    case 1:
-      return '&hearts;';
-      break;
-    case 2:
-      return '&clubs;';
-      break;
-    case 3:
-      return '&diams;';
-      break;
-    default:
-      break;
-  }
+  const suitObj = {
+    0: '&spades;',
+    1: '&hearts;',
+    2: '&clubs;',
+    3: '&diams;'
+  };
+  return suitObj[suit];
 }
 
-function cardNum(card) {
-  const value = card % 13;
-  switch (value) {
-    case 0:
-      return 'A';
-      break;
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-      return value + 1;
-      break;
-    case 10:
-      return 'J';
-      break;
-    case 11:
-      return 'Q';
-      break;
-    case 12:
-      return 'K';
-      break;
-    default:
-      break;
+const cardChar = (card) => {
+  const char = card % 13;
+  const charObj = {
+    0: 'A',
+    1: '2',
+    2: '3',
+    3: '4',
+    4: '5',
+    5: '6',
+    6: '7',
+    7: '8',
+    8: '9',
+    9: '10',
+    10: 'J',
+    11: 'Q',
+    12: 'K'
   }
+  return charObj[char];
 }
 
-function cardValue(card) {
+const cardValue = (card) => {
   const value = card % 13;
-  switch (value) {
-    case 0:
-      return 14;
-      break;
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
-    case 12:
-      return value + 1;
-      break;
-    default:
-      break;
+  const valueObj = {
+    0: 14,
+    1: 2,
+    2: 3,
+    3: 4,
+    4: 5,
+    5: 6,
+    6: 7,
+    7: 8,
+    8: 9,
+    9: 10,
+    10: 11,
+    11: 12,
+    12: 13
   }
+  return valueObj[value];
 }
