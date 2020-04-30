@@ -21,9 +21,9 @@ const beautify = (deck) => {
   return beautifyDeck;
 }
 
-const cardGenerator = (card) => {
-  return cardSuit(card) + cardChar(card);
-}
+const cardGenerator = (card) => cardSuit(card) + cardChar(card)
+
+const cardValue = (card) => card % 13 === 0 ? 14 : card % 13 + 1
 
 const cardSuit = (card) => {
   const suit = Math.floor(card / 13);
@@ -54,24 +54,4 @@ const cardChar = (card) => {
     12: 'K'
   }
   return charObj[char];
-}
-
-const cardValue = (card) => {
-  const value = card % 13;
-  const valueObj = {
-    0: 14,
-    1: 2,
-    2: 3,
-    3: 4,
-    4: 5,
-    5: 6,
-    6: 7,
-    7: 8,
-    8: 9,
-    9: 10,
-    10: 11,
-    11: 12,
-    12: 13
-  }
-  return valueObj[value];
 }
